@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { fabric } from 'fabric'
 
-export const MainCanvas = () => {
+export const FabricCanvas = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
 

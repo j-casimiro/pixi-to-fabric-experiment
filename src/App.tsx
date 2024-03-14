@@ -1,10 +1,10 @@
 import './App.css'
-import { MainCanvas } from './components/MainCanvas'
+import { FabricCanvas } from './components/FabricCanvas'
 
 function App() {
 
   return (
-    <MainCanvas />
+    <FabricCanvas />
   )
 }
 
