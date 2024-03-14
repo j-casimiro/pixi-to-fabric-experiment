@@ -12,6 +12,7 @@ export const MainCanvas = () => {
             const newCanvas = new fabric.Canvas(canvasRef.current, {
                 width: 500,
                 height: 500,
+                backgroundColor: '#FCFBF4',
             });
             setCanvas(newCanvas);
         }
@@ -33,7 +34,7 @@ export const MainCanvas = () => {
                 const svgContent = reader.result as string;
                 fabric.loadSVGFromString(svgContent, (objects) => {
                     const image = fabric.util.groupSVGElements(objects);
-                    image.set({ left: 0.1, top: 0.1 });
+                    image.set({ left: 100, top: 100 });
                     canvas?.add(image);
                     canvas?.renderAll();
                 })
