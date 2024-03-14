@@ -1,15 +1,10 @@
 import './App.css'
+import { MainCanvas } from './components/MainCanvas'
 
 function App() {
 
   return (
-    <>
-      <nav>
-        <button>
-          Add Logo
-        </button>
-      </nav>
-    </>
+    <MainCanvas />
   )
 }
 
