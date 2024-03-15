@@ -37,6 +37,7 @@ export const FabricCanvas = () => {
                     image.set({ left: 100, top: 100 });
                     canvas?.add(image);
                     canvas?.renderAll();
+                    console.log(JSON.stringify(canvas));
                 })
             }
         }
@@ -46,10 +47,10 @@ export const FabricCanvas = () => {
 
     return (
         <>
-            <canvas ref={canvasRef} />
             <button onClick={handleAddImage}>
                 Add Image
             </button>
+            <canvas ref={canvasRef} />
         </>
     )
 }
