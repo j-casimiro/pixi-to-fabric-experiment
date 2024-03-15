@@ -18,6 +18,12 @@ export const FabricCanvas = () => {
         }
     }, []);
 
+    const handlePixiData = async () => {
+        // TODO
+    };
+
+    console.log(handlePixiData());
+
     const handleAddImage = async () => {
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
@@ -34,8 +40,8 @@ export const FabricCanvas = () => {
                 const svgContent = reader.result as string;
                 fabric.loadSVGFromString(svgContent, (objects) => {
                     const image = fabric.util.groupSVGElements(objects);
-                    image.set({ left: 100, top: 100 });
                     canvas?.add(image);
+                    canvas?.centerObject(image);
                     canvas?.renderAll();
                     console.log(JSON.stringify(canvas));
                 })
