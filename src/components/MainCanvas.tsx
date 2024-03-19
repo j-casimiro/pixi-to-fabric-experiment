@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import * as PIXI from 'pixi.js';
-import { fabric } from 'fabric';
+import React, { useRef } from "react";
+import * as PIXI from "pixi.js";
+import { fabric } from "fabric";
 
 export const MainCanvas: React.FC = () => {
   const pixiCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -12,37 +12,42 @@ export const MainCanvas: React.FC = () => {
 
     const reader = new FileReader();
     reader.onload = () => {
-        const svgData = reader.result as string;
-        renderSVG(svgData);
+      const svgData = reader.result as string;
+      renderSVG(svgData);
     };
     reader.readAsText(file);
   };
 
-  const renderSVG = async (svgData: string) => {
+  const renderSVG = (svgData: string) => {
     // PixiJS
-    const pixiApp = new PIXI.Application();
+    (async () => {
+      // Create a new application
+      const app = new PIXI.Application();
 
-    await pixiApp.init({
-        width: 500,
-        height: 500,
+      // Initialize the application
+      await app.init({
         antialias: true,
         backgroundColor: 'white',
-    })
-    const pixiSprite = new PIXI.Sprite(PIXI.Texture.from(svgData));
-    pixiApp.stage.addChild(pixiSprite);
+        width: 500,
+        height: 500,
+        view: pixiCanvasRef.current!,
+      });
+
+      const graphics = new PIXI.Graphics().svg(svgData);
+      app.stage.addChild(graphics);
+    })();
 
     // Fabric.js
     const fabricCanvas = new fabric.Canvas(fabricCanvasRef.current!, {
-        width: 500,
-        height: 500,
-        backgroundColor: '#FCFBF4',
+      width: 500,
+      height: 500,
     });
 
     fabric.loadSVGFromString(svgData, (objects) => {
-        const image = fabric.util.groupSVGElements(objects);
-        fabricCanvas.add(image);
-        fabricCanvas.centerObject(image);
-        fabricCanvas.renderAll();
+      const image = fabric.util.groupSVGElements(objects);
+      fabricCanvas.add(image);
+      fabricCanvas.centerObject(image);
+      fabricCanvas.renderAll();
     });
   };
 
@@ -51,16 +56,16 @@ export const MainCanvas: React.FC = () => {
       <input type="file" accept=".svg" onChange={handleFileUpload} />
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div style={{ margin: 10 }}>
-            <p>This is a pixi canvas</p>
-            <div style={{backgroundColor: '#FCFBF4'}}>
-                <canvas ref={pixiCanvasRef} width={500} height={500} />
-            </div>
+          <p>This is a pixi canvas</p>
+          <div style={{ backgroundColor: '#FCFBF4' }}>
+            <canvas ref={pixiCanvasRef} width={500} height={500} />
+          </div>
         </div>
-        <div style={{ margin: 10}}>
-        <p>This is a fabric canvas</p>
-            <div style={{backgroundColor: '#FCFBF4'}}>
-                <canvas ref={fabricCanvasRef} width={500} height={500} />
-            </div>
+        <div style={{ margin: 10 }}>
+          <p>This is a fabric canvas</p>
+          <div style={{ backgroundColor: '#FCFBF4' }}>
+            <canvas ref={fabricCanvasRef} width={500} height={500} />
+          </div>
         </div>
       </div>
     </div>
