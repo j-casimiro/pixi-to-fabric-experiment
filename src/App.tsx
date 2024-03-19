@@ -1,13 +1,12 @@
 import './App.css'
-import { FabricCanvas } from './components/FabricCanvas'
+import { MainCanvas } from './components/MainCanvas'
 // import { PixiCanvas } from './components/PixiCanvas'
 
 function App() {
 
   return (
     <>
-      <FabricCanvas />
-      {/* <PixiCanvas /> */}
+      <MainCanvas />
     </>
   )
 }
