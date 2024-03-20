@@ -34,6 +34,8 @@ export const MainCanvas: React.FC = () => {
       });
 
       const graphics = new PIXI.Graphics().svg(svgData);
+      graphics.x = app.screen.width / 2;
+      graphics.y = app.screen.height / 2;
       app.stage.addChild(graphics);
     })();
 
