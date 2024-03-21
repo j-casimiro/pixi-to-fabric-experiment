@@ -34,9 +34,10 @@ export const MainCanvas: React.FC = () => {
       });
 
       const graphics = new PIXI.Graphics().svg(svgData);
-      graphics.x = app.screen.width / 2;
-      graphics.y = app.screen.height / 2;
+      graphics.x = app.screen.width / 4;
+      graphics.y = app.screen.height / 4;
       app.stage.addChild(graphics);
+      console.log();
     })();
 
     // Fabric.js
@@ -50,6 +51,7 @@ export const MainCanvas: React.FC = () => {
       fabricCanvas.add(image);
       fabricCanvas.centerObject(image);
       fabricCanvas.renderAll();
+      console.log(fabricCanvas);
     });
   };
 
