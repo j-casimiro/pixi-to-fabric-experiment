@@ -27,7 +27,7 @@ export const MainCanvas: React.FC = () => {
       // Initialize the application
       await app.init({
         antialias: true,
-        backgroundColor: 'white',
+        backgroundColor: '#FCFBF4',
         width: 500,
         height: 500,
         view: pixiCanvasRef.current!,
@@ -37,7 +37,6 @@ export const MainCanvas: React.FC = () => {
       graphics.x = app.screen.width / 4;
       graphics.y = app.screen.height / 4;
       app.stage.addChild(graphics);
-      console.log();
     })();
 
     // Fabric.js
@@ -51,7 +50,6 @@ export const MainCanvas: React.FC = () => {
       fabricCanvas.add(image);
       fabricCanvas.centerObject(image);
       fabricCanvas.renderAll();
-      console.log(fabricCanvas);
     });
   };
 
