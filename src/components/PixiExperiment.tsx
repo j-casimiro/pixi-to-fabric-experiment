@@ -38,7 +38,7 @@ export const PixiExperiment = () => {
             <label htmlFor="file">FOR PNG</label>
             <input type="file" id="file" accept=".png" onChange={handleFileUpload} />
             <div style={{ backgroundColor: '#FCFBF4' }}>
-                <canvas ref={pixiCanvasRef} width={500} height={495} />
+                <canvas ref={pixiCanvasRef} width={500} height={500} />
             </div>
         </div>
     );
