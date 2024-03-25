@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import * as PIXI from "pixi.js";
+// import * as PIXI from "pixi.js";
 import { fabric } from "fabric";
 
 export const MainCanvas: React.FC = () => {
@@ -19,25 +19,22 @@ export const MainCanvas: React.FC = () => {
   };
 
   const renderSVG = (svgData: string) => {
-    // PixiJS
-    (async () => {
-      // Create a new application
-      const app = new PIXI.Application();
+    // PixiJS version 8.0.2 does not support svg importing
+    // (async () => {
+    //   // Create a new application
+    //   const app = new PIXI.Application({
+    //     antialias: true,
+    //     backgroundColor: 0xFCFBF4,
+    //     width: 500,
+    //     height: 500,
+    //     view: pixiCanvasRef.current!,
+    //   });
 
-      // Initialize the application
-      await app.init({
-        antialias: true,
-        backgroundColor: '#FCFBF4',
-        width: 500,
-        height: 500,
-        view: pixiCanvasRef.current!,
-      });
-
-      const graphics = new PIXI.Graphics().svg(svgData);
-      graphics.x = app.screen.width / 4;
-      graphics.y = app.screen.height / 4;
-      app.stage.addChild(graphics);
-    })();
+    //   const graphics = new PIXI.Graphics().svg(svgData);
+    //   graphics.x = app.screen.width / 4;
+    //   graphics.y = app.screen.height / 4;
+    //   app.stage.addChild(graphics);
+    // })();
 
     // Fabric.js
     const fabricCanvas = new fabric.Canvas(fabricCanvasRef.current!, {
@@ -55,6 +52,7 @@ export const MainCanvas: React.FC = () => {
 
   return (
     <div>
+      <label>FOR SVG</label>
       <input type="file" accept=".svg" onChange={handleFileUpload} />
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div style={{ margin: 10 }}>
