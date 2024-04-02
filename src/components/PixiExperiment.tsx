@@ -93,6 +93,8 @@ export const PixiExperiment: React.FC<PixiExperimentProps> = () => {
         fabricCanvas.add(fabricImage);
         fabricCanvas.centerObject(fabricImage);
         fabricCanvas.renderAll();
+
+        console.log(JSON.stringify(fabricCanvas));
         
         resolve();
       });
