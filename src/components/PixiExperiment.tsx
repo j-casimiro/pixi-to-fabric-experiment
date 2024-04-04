@@ -31,24 +31,31 @@ export const PixiExperiment: React.FC = () => {
       height: 500,
       view: pixiCanvasRef.current!,
     });
+  
+    const img = Sprite.from(image);
+  
+    img.texture.baseTexture.once('loaded', () => {
+      const canvas = app.renderer.extract.canvas(img);
+      const imgData = canvas.getContext('2d')?.getImageData(0, 0, canvas.width, canvas.height);
+      if (!imgData) {
+        console.error("Failed to get image data");
+        return;
+      }
 
-    const bunny = Sprite.from(image);
-    bunny.anchor.set(0.5);
-    const canvasWidth = app.screen.width;
-    const canvasHeight = app.screen.height;
-    const scale = Math.min(canvasWidth / bunny.width, canvasHeight / bunny.height) * 0.8;
-    bunny.scale.set(scale);
-
-    bunny.x = canvasWidth / 2;
-    bunny.y = canvasHeight / 2;
-
-    app.stage.addChild(bunny);
-
-    const canvas = app.renderer.extract.canvas(bunny);
-    const imgData = canvas.getContext('2d')?.getImageData(0, 0, canvas.width, canvas.height);
-    if (!imgData) return;
-
-    renderFabricCanvas(imgData.data, canvas.width);
+      img.anchor.set(0.5);
+      const canvasWidth = app.screen.width;
+      const canvasHeight = app.screen.height;
+      const scale = Math.min(canvasWidth / img.width, canvasHeight / img.height) * 0.8;
+      img.scale.set(scale);
+    
+      img.x = canvasWidth / 2;
+      img.y = canvasHeight / 2;
+    
+      app.stage.addChild(img);
+  
+      console.log(imgData.data, canvas.width);
+      renderFabricCanvas(imgData.data, canvas.width);
+    });
   };
 
   const renderFabricCanvas = async (pixelData: Uint8ClampedArray, width: number) => {
