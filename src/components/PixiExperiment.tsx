@@ -2,9 +2,7 @@ import React, { useRef } from 'react';
 import { Application, Sprite } from 'pixi.js';
 import { fabric } from 'fabric';
 
-interface PixiExperimentProps {}
-
-export const PixiExperiment: React.FC<PixiExperimentProps> = () => {
+export const PixiExperiment: React.FC = () => {
   const pixiCanvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<HTMLCanvasElement>(null);
 
