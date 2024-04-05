@@ -5,6 +5,8 @@ import { fabric } from "fabric";
 export const PixiExperiment: React.FC = () => {
   const pixiCanvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<HTMLCanvasElement>(null);
+  const imageData = useRef<Uint8ClampedArray | null>(null);
+  const canvasW = useRef<number | null>(null);
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -58,9 +60,18 @@ export const PixiExperiment: React.FC = () => {
 
       app.stage.addChild(img);
 
-      console.log(imgData.data, canvas.width);
-      renderFabricCanvas(imgData.data, canvas.width);
+      imageData.current = imgData.data;
+      canvasW.current = canvas.width;
     });
+  };
+
+  const handleConvertButtonClick = () => {
+    if (!imageData.current || !canvasW.current) {
+      console.error("Image data or canvas width is not available");
+      return;
+    }
+    console.log("button triggered");
+    renderFabricCanvas(imageData.current, canvasW.current);
   };
 
   const renderFabricCanvas = async (
@@ -124,6 +135,9 @@ export const PixiExperiment: React.FC = () => {
             <canvas ref={fabricCanvasRef} width={500} height={500} />
           </div>
         </div>
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <button onClick={handleConvertButtonClick}>Convert</button>
       </div>
     </div>
   );
