@@ -3,10 +3,10 @@ import { Application, Sprite } from "pixi.js";
 import { fabric } from "fabric";
 
 export const PixiExperiment: React.FC = () => {
-  const pixiCanvasRef = useRef<HTMLCanvasElement>(null); // put this to global state
+  const pixiCanvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<HTMLCanvasElement>(null);
-  const imageData = useRef<Uint8ClampedArray | null>(null); // put this to global state
-  const canvasW = useRef<number | null>(null); // put this to global state
+  const imageData = useRef<Uint8ClampedArray | null>(null);
+  const canvasW = useRef<number | null>(null);
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -14,8 +14,8 @@ export const PixiExperiment: React.FC = () => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    const imageData = await readFileAsDataURL(file);
-    renderPngToPixi(imageData);
+    const uploadedImage = await readFileAsDataURL(file);
+    ImageToPixi(uploadedImage);
   };
 
   const readFileAsDataURL = (file: File): Promise<string> => {
@@ -27,7 +27,7 @@ export const PixiExperiment: React.FC = () => {
     });
   };
 
-  const renderPngToPixi = async (image: string) => {
+  const ImageToPixi = async (image: string) => {
     const app = new Application({
       antialias: true,
       backgroundColor: "#FFFFFF",
@@ -71,10 +71,10 @@ export const PixiExperiment: React.FC = () => {
       return;
     }
     console.log("button triggered");
-    renderFabricCanvas(imageData.current, canvasW.current);
+    RenderFabricCanvas(imageData.current, canvasW.current);
   };
 
-  const renderFabricCanvas = async (
+  const RenderFabricCanvas = async (
     pixelData: Uint8ClampedArray,
     width: number
   ) => {
