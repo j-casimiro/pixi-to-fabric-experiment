@@ -3,10 +3,10 @@ import { Application, Sprite } from "pixi.js";
 import { fabric } from "fabric";
 
 export const PixiExperiment: React.FC = () => {
-  const pixiCanvasRef = useRef<HTMLCanvasElement>(null);
+  const pixiCanvasRef = useRef<HTMLCanvasElement>(null); // put this to global state
   const fabricCanvasRef = useRef<HTMLCanvasElement>(null);
-  const imageData = useRef<Uint8ClampedArray | null>(null);
-  const canvasW = useRef<number | null>(null);
+  const imageData = useRef<Uint8ClampedArray | null>(null); // put this to global state
+  const canvasW = useRef<number | null>(null); // put this to global state
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
