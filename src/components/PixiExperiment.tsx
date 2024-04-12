@@ -63,7 +63,7 @@ export const PixiExperiment: React.FC = () => {
 
       imageData.current = imgData.data;
       canvasW.current = canvas.width;
-      setConversionComplete(false); // Set conversion status to true
+      setConversionComplete(false);
     });
   };
 
@@ -127,7 +127,7 @@ export const PixiExperiment: React.FC = () => {
         fabricCanvas.renderAll();
 
         resolve();
-        setConversionComplete(true); // Set conversion status to true
+        setConversionComplete(true);
       });
     });
   };
