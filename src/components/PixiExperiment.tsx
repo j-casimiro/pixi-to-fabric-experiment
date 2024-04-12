@@ -3,11 +3,12 @@ import { Application, Sprite } from "pixi.js";
 import { fabric } from "fabric";
 
 export const PixiExperiment: React.FC = () => {
-  const pixiCanvasRef = useRef<HTMLCanvasElement>(null);
-  const fabricCanvasRef = useRef<HTMLCanvasElement>(null);
+  const pixiCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const fabricCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const [conversionComplete, setConversionComplete] = useState<boolean>(true);
   const imageData = useRef<Uint8ClampedArray | null>(null);
   const canvasW = useRef<number | null>(null);
+  const [app, setApp] = useState<Application | null>(null);
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -29,7 +30,13 @@ export const PixiExperiment: React.FC = () => {
   };
 
   const ImageToPixi = async (image: string) => {
-    const app = new Application({
+    // Clearing previous Pixi.js application instance and canvas
+    if (app) {
+      app.destroy();
+      setApp(null);
+    }
+
+    const pixiApp = new Application({
       antialias: true,
       backgroundColor: "#FFFFFF",
       width: 500,
@@ -37,10 +44,12 @@ export const PixiExperiment: React.FC = () => {
       view: pixiCanvasRef.current!,
     });
 
+    setApp(pixiApp); // Set the Pixi.js app state
+
     const img = Sprite.from(image);
 
     img.texture.baseTexture.once("loaded", () => {
-      const canvas = app.renderer.extract.canvas(img);
+      const canvas = pixiApp.renderer.extract.canvas(img);
       const imgData = canvas
         .getContext("2d")
         ?.getImageData(0, 0, canvas.width, canvas.height);
@@ -50,8 +59,8 @@ export const PixiExperiment: React.FC = () => {
       }
 
       img.anchor.set(0.5);
-      const canvasWidth = app.screen.width;
-      const canvasHeight = app.screen.height;
+      const canvasWidth = pixiApp.screen.width;
+      const canvasHeight = pixiApp.screen.height;
       const scale =
         Math.min(canvasWidth / img.width, canvasHeight / img.height) * 0.8;
       img.scale.set(scale);
@@ -59,7 +68,7 @@ export const PixiExperiment: React.FC = () => {
       img.x = canvasWidth / 2;
       img.y = canvasHeight / 2;
 
-      app.stage.addChild(img);
+      pixiApp.stage.addChild(img);
 
       imageData.current = imgData.data;
       canvasW.current = canvas.width;
@@ -79,7 +88,6 @@ export const PixiExperiment: React.FC = () => {
       console.error("There is already a rendered image.");
       return;
     }
-    console.log("button triggered");
     RenderFabricCanvas(imageData.current, canvasW.current);
   };
 
@@ -122,6 +130,8 @@ export const PixiExperiment: React.FC = () => {
         fabricImage.scaleY = scaleFactor;
 
         const fabricCanvas = new fabric.Canvas(fabricCanvasRef.current!);
+        fabricCanvas.clear();
+
         fabricCanvas.add(fabricImage);
         fabricCanvas.centerObject(fabricImage);
         fabricCanvas.renderAll();
@@ -151,7 +161,10 @@ export const PixiExperiment: React.FC = () => {
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <button onClick={handleConvertButtonClick} disabled={!imageData.current || conversionComplete}>
+        <button
+          onClick={handleConvertButtonClick}
+          disabled={!imageData.current || conversionComplete}
+        >
           Convert
         </button>
       </div>
