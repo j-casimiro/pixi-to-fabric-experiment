@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Application, Sprite } from "pixi.js";
 import { fabric } from "fabric";
 
 export const PixiExperiment: React.FC = () => {
   const pixiCanvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<HTMLCanvasElement>(null);
+  const [conversionComplete, setConversionComplete] = useState<boolean>(true);
   const imageData = useRef<Uint8ClampedArray | null>(null);
   const canvasW = useRef<number | null>(null);
 
@@ -62,12 +63,20 @@ export const PixiExperiment: React.FC = () => {
 
       imageData.current = imgData.data;
       canvasW.current = canvas.width;
+      setConversionComplete(false); // Set conversion status to true
     });
   };
 
   const handleConvertButtonClick = () => {
     if (!imageData.current || !canvasW.current) {
-      console.error("Image data or canvas width is not available");
+      console.error("Image data or canvas width is not available.");
+      return;
+    }
+    if (
+      fabricCanvasRef.current &&
+      fabricCanvasRef.current.childNodes.length > 0
+    ) {
+      console.error("There is already a rendered image.");
       return;
     }
     console.log("button triggered");
@@ -104,9 +113,13 @@ export const PixiExperiment: React.FC = () => {
 
       fabric.Image.fromURL(dataURL, (fabricImage) => {
         fabricImage.set({ left: 0, top: 0 });
-        const scaleFactor = 0.5;
-        fabricImage.scaleX = (fabricImage.scaleX ?? 1) * scaleFactor;
-        fabricImage.scaleY = (fabricImage.scaleY ?? 1) * scaleFactor;
+
+        const scaleFactor = Math.min(
+          450 / fabricImage.width!,
+          450 / fabricImage.height!
+        );
+        fabricImage.scaleX = scaleFactor;
+        fabricImage.scaleY = scaleFactor;
 
         const fabricCanvas = new fabric.Canvas(fabricCanvasRef.current!);
         fabricCanvas.add(fabricImage);
@@ -114,6 +127,7 @@ export const PixiExperiment: React.FC = () => {
         fabricCanvas.renderAll();
 
         resolve();
+        setConversionComplete(true); // Set conversion status to true
       });
     });
   };
@@ -137,7 +151,9 @@ export const PixiExperiment: React.FC = () => {
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <button onClick={handleConvertButtonClick}>Convert</button>
+        <button onClick={handleConvertButtonClick} disabled={!imageData.current || conversionComplete}>
+          Convert
+        </button>
       </div>
     </div>
   );
