@@ -1,13 +1,13 @@
 import './App.css'
 // import { MainCanvas } from './components/MainCanvas'
-import { PixiExperiment } from './components/PixiExperiment'
+import { ConversionExperiment } from './components/ConversionExperiment'
 
 function App() {
 
   return (
     <>
       {/* <MainCanvas /> */}
-      <PixiExperiment />
+      <ConversionExperiment />
     </>
   )
 }

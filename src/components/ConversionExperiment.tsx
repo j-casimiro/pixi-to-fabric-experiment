@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Application, Sprite } from "pixi.js";
 import { fabric } from "fabric";
 
-export const PixiExperiment: React.FC = () => {
+export const ConversionExperiment: React.FC = () => {
   const pixiCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const fabricCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const [conversionComplete, setConversionComplete] = useState<boolean>(true);
