@@ -73,6 +73,9 @@ export const ConversionExperiment: React.FC = () => {
       imageData.current = imgData.data;
       canvasW.current = canvas.width;
       setConversionComplete(false);
+
+      // this is the data that will be thrown by the endpoint
+      console.log(imageData.current, canvasW.current);
     });
   };
 
