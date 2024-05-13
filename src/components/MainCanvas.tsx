@@ -34,7 +34,7 @@ export const MainCanvas: React.FC = () => {
 
   return (
     <div>
-      <label>FOR SVG</label>
+      <label>FOR SVG:</label>
       <input type="file" accept=".svg" onChange={handleFileUpload} />
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div style={{ margin: 10 }}>
