@@ -138,6 +138,7 @@ export const ConversionExperiment: React.FC = () => {
         fabricCanvas.add(fabricImage);
         fabricCanvas.centerObject(fabricImage);
         fabricCanvas.renderAll();
+        console.log(fabricCanvas.getObjects());
 
         resolve();
         setConversionComplete(true);
