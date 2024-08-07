@@ -1,13 +1,8 @@
-import './App.css'
-import { ConversionExperiment } from './components/ConversionExperiment'
+import './App.css';
+import { ConversionExperiment } from './components/ConversionExperiment';
 
 function App() {
-
-  return (
-    <>
-      <ConversionExperiment />
-    </>
-  )
+  return <ConversionExperiment />;
 }
 
-export default App
+export default App;

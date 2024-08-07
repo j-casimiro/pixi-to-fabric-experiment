@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
-import { Application, Sprite } from "pixi.js";
-import { fabric } from "fabric";
+import React, { useRef, useState } from 'react';
+import { Application, Sprite } from 'pixi.js';
+import { fabric } from 'fabric';
 
 export const ConversionExperiment: React.FC = () => {
   const pixiCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -38,7 +38,7 @@ export const ConversionExperiment: React.FC = () => {
 
     const pixiApp = new Application({
       antialias: true,
-      backgroundColor: "#FFFFFF",
+      backgroundColor: '#FFFFFF',
       width: 500,
       height: 500,
       view: pixiCanvasRef.current!,
@@ -48,13 +48,13 @@ export const ConversionExperiment: React.FC = () => {
 
     const img = Sprite.from(image);
 
-    img.texture.baseTexture.once("loaded", () => {
+    img.texture.baseTexture.once('loaded', () => {
       const canvas = pixiApp.renderer.extract.canvas(img);
       const imgData = canvas
-        .getContext("2d")
+        .getContext('2d')
         ?.getImageData(0, 0, canvas.width, canvas.height);
       if (!imgData) {
-        console.error("Failed to get image data");
+        console.error('Failed to get image data');
         return;
       }
 
@@ -81,14 +81,14 @@ export const ConversionExperiment: React.FC = () => {
 
   const handleConvertButtonClick = () => {
     if (!imageData.current || !canvasW.current) {
-      console.error("Image data or canvas width is not available.");
+      console.error('Image data or canvas width is not available.');
       return;
     }
     if (
       fabricCanvasRef.current &&
       fabricCanvasRef.current.childNodes.length > 0
     ) {
-      console.error("There is already a rendered image.");
+      console.error('There is already a rendered image.');
       return;
     }
     RenderFabricCanvas(imageData.current, canvasW.current);
@@ -110,12 +110,12 @@ export const ConversionExperiment: React.FC = () => {
         paddedLength / (4 * width)
       );
 
-      const canvas = document.createElement("canvas");
+      const canvas = document.createElement('canvas');
       canvas.width = width;
       canvas.height = paddedLength / (4 * width);
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext('2d');
       if (!ctx) {
-        reject(new Error("Failed to get canvas context"));
+        reject(new Error('Failed to get canvas context'));
         return;
       }
       ctx.putImageData(imgData, 0, 0);
@@ -148,23 +148,33 @@ export const ConversionExperiment: React.FC = () => {
 
   return (
     <div>
-      <label htmlFor="file">Upload PNG:</label>
+      <label htmlFor="file">Upload File:</label>
       <input type="file" id="file" onChange={handleFileUpload} />
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div style={{ margin: 10 }}>
           <p>This is a pixi canvas</p>
-          <div style={{ backgroundColor: "#FFFFFF" }}>
+          <div
+            style={{
+              backgroundImage: `url(https://resources.qstrike.net/vectorsoft/icons/tiles.png)`,
+              backgroundColor: '#f8f8f8',
+            }}
+          >
             <canvas ref={pixiCanvasRef} width={500} height={500} />
           </div>
         </div>
         <div style={{ margin: 10 }}>
           <p>This is a fabric canvas</p>
-          <div style={{ backgroundColor: "#FFFFFF" }}>
+          <div
+            style={{
+              backgroundImage: `url(https://resources.qstrike.net/vectorsoft/icons/tiles.png)`,
+              backgroundColor: '#f8f8f8',
+            }}
+          >
             <canvas ref={fabricCanvasRef} width={500} height={500} />
           </div>
         </div>
       </div>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: 'center' }}>
         <button
           onClick={handleConvertButtonClick}
           disabled={!imageData.current || conversionComplete}
