@@ -1,5 +1,3 @@
-// src/CanvasContainer.tsx
-
 import React, { useEffect, useRef, useState } from 'react';
 import * as PIXI from 'pixi.js';
 import { fabric } from 'fabric';
@@ -48,6 +46,8 @@ const CanvasContainer: React.FC = () => {
         fontSize: 24,
         fill: 0xff1010, // Red color in hex
         align: 'center',
+        stroke: 0x0000ff, // Blue stroke color in hex
+        strokeThickness: 4, // Stroke thickness
       });
       text.x = 100;
       text.y = 150;
@@ -101,8 +101,11 @@ const CanvasContainer: React.FC = () => {
       const fillColor = pixiText.style.fill as number;
       const textAlign = pixiText.style.align;
       const position = { x: pixiText.x, y: pixiText.y };
+      const strokeColor = pixiText.style.stroke as number;
+      const strokeThickness = pixiText.style.strokeThickness;
 
       const rgbColor = fillColor.toString(); // Convert hex to string format, e.g., "#ff1010"
+      const strokeRgbColor = strokeColor.toString(); // Convert stroke hex to string format, e.g., "#0000ff"
 
       const fabricText = new fabric.Text(textValue, {
         left: position.x,
@@ -111,6 +114,9 @@ const CanvasContainer: React.FC = () => {
         fontSize: fontSize,
         fill: rgbColor,
         textAlign: textAlign as string,
+        stroke: strokeRgbColor, // Apply stroke color
+        strokeWidth: strokeThickness, // Apply stroke thickness
+        paintFirst: 'stroke',
       });
 
       fabricCanvas.add(fabricText);
