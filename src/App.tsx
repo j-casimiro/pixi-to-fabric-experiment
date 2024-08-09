@@ -1,8 +1,8 @@
 import './App.css';
-import { ConversionExperiment } from './components/ConversionExperiment';
+import TextConversion from './components/TextConversion';
 
 function App() {
-  return <ConversionExperiment />;
+  return <TextConversion />;
 }
 
 export default App;
