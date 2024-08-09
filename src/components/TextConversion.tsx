@@ -41,23 +41,28 @@ const CanvasContainer: React.FC = () => {
 
   const addPixiText = () => {
     if (pixiApp) {
-      const text = new PIXI.Text('Hello, Pixi!', {
+      const text = new PIXI.Text('Hello, Jehu!', {
         fontFamily: 'Arial',
-        fontSize: 24,
+        fontSize: 40,
         fill: 0xff1010, // Red color in hex
         align: 'center',
         stroke: 0x0000ff, // Blue stroke color in hex
         strokeThickness: 4, // Stroke thickness
+        fontStyle: 'italic',
+        fontWeight: 'bold',
       });
-      text.x = 100;
-      text.y = 150;
-      text.eventMode = 'static';
+      text.x = 150;
+      text.y = 180;
+      text.interactive = true;
       text.cursor = 'pointer';
+
+      // Set up drag-and-drop events
       text
         .on('pointerdown', onDragStart)
         .on('pointerup', onDragEnd)
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
+
       pixiApp.stage.addChild(text);
       setPixiText(text);
     }
@@ -66,30 +71,38 @@ const CanvasContainer: React.FC = () => {
   const onDragStart = (event: PIXI.FederatedPointerEvent) => {
     const target = event.currentTarget as PIXI.Text & {
       dragging?: boolean;
-      data?: PIXI.FederatedPointerEvent;
+      dragData?: PIXI.FederatedPointerEvent;
+      dragOffset?: PIXI.Point;
     };
-    target.data = event;
     target.dragging = true;
+    target.dragData = event;
+    target.dragOffset = new PIXI.Point(
+      event.global.x - target.x,
+      event.global.y - target.y
+    );
   };
 
   const onDragEnd = (event: PIXI.FederatedPointerEvent) => {
     const target = event.currentTarget as PIXI.Text & {
       dragging?: boolean;
-      data?: PIXI.FederatedPointerEvent;
+      dragData?: PIXI.FederatedPointerEvent;
+      dragOffset?: PIXI.Point;
     };
     target.dragging = false;
-    target.data = undefined;
+    target.dragData = undefined;
+    target.dragOffset = undefined;
   };
 
   const onDragMove = (event: PIXI.FederatedPointerEvent) => {
     const target = event.currentTarget as PIXI.Text & {
       dragging?: boolean;
-      data?: PIXI.FederatedPointerEvent;
+      dragData?: PIXI.FederatedPointerEvent;
+      dragOffset?: PIXI.Point;
     };
-    if (target.dragging && target.data) {
-      const newPosition = target.data.getLocalPosition(target.parent);
-      target.x = newPosition.x;
-      target.y = newPosition.y;
+    if (target.dragging && target.dragData && target.dragOffset) {
+      const newPosition = target.dragData.getLocalPosition(target.parent);
+      target.x = newPosition.x - target.dragOffset.x;
+      target.y = newPosition.y - target.dragOffset.y;
     }
   };
 
@@ -103,6 +116,8 @@ const CanvasContainer: React.FC = () => {
       const position = { x: pixiText.x, y: pixiText.y };
       const strokeColor = pixiText.style.stroke as number;
       const strokeThickness = pixiText.style.strokeThickness;
+      const fontStyle = pixiText.style.fontStyle;
+      const fontWeight = pixiText.style.fontWeight;
 
       const rgbColor = fillColor.toString(); // Convert hex to string format, e.g., "#ff1010"
       const strokeRgbColor = strokeColor.toString(); // Convert stroke hex to string format, e.g., "#0000ff"
@@ -117,6 +132,9 @@ const CanvasContainer: React.FC = () => {
         stroke: strokeRgbColor, // Apply stroke color
         strokeWidth: strokeThickness, // Apply stroke thickness
         paintFirst: 'stroke',
+        fontStyle: fontStyle,
+        fontWeight: fontWeight,
+        text: 'Hello', // TODO
       });
 
       fabricCanvas.add(fabricText);
