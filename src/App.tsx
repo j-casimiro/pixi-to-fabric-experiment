@@ -1,8 +1,8 @@
 import './App.css';
-import TextConversion from './components/TextConversion';
+import UniformBuilder from './components/UniformBuilder';
 
 function App() {
-  return <TextConversion />;
+  return <UniformBuilder />;
 }
 
 export default App;

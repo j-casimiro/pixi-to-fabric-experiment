@@ -41,18 +41,18 @@ const CanvasContainer: React.FC = () => {
 
   const addPixiText = () => {
     if (pixiApp) {
-      const text = new PIXI.Text('Hello, Jehu!', {
+      const text = new PIXI.Text('PROLOOK!', {
         fontFamily: 'Arial',
         fontSize: 40,
-        fill: 0xff1010, // Red color in hex
+        fill: 0xff1010,
         align: 'center',
-        stroke: 0x0000ff, // Blue stroke color in hex
-        strokeThickness: 4, // Stroke thickness
+        stroke: 0x0000ff,
+        strokeThickness: 4,
         fontStyle: 'italic',
         fontWeight: 'bold',
       });
       text.x = 150;
-      text.y = 180;
+      text.y = 150;
       text.interactive = true;
       text.cursor = 'pointer';
 
@@ -134,7 +134,7 @@ const CanvasContainer: React.FC = () => {
         paintFirst: 'stroke',
         fontStyle: fontStyle,
         fontWeight: fontWeight,
-        text: 'Hello', // TODO
+        // text: 'Text', // TODO
       });
 
       fabricCanvas.add(fabricText);
