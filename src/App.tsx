@@ -1,8 +1,8 @@
 import './App.css';
-import UniformBuilder from './components/UniformBuilder';
+import UniformBuilderNoGrouping from './components/UniformBuilderNoGrouping';
 
 function App() {
-  return <UniformBuilder />;
+  return <UniformBuilderNoGrouping />;
 }
 
 export default App;

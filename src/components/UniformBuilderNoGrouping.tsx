@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { fabric } from 'fabric';
 
-const UniformBuilder: React.FC = () => {
+const UniformBuilderNoGrouping: React.FC = () => {
   useEffect(() => {
     const canvas = new fabric.Canvas('canvas');
 
@@ -81,13 +81,13 @@ const UniformBuilder: React.FC = () => {
       );
 
       const images = await Promise.all(imagePromises);
-      return images;
+      images.forEach((image) => canvas.add(image));
+
+      canvas.renderAll();
     };
 
-    // Add text and group them with images
-    const addTextAndGroup = async () => {
-      const images = await addImages();
-
+    // Add text and ensure it appears in front
+    const addText = () => {
       // Create text objects
       const teamNameText = createText(teamName, {
         left: 500,
@@ -119,22 +119,24 @@ const UniformBuilder: React.FC = () => {
         paintFirst: 'stroke',
       });
 
-      // Create a group with all images and text
-      const group = new fabric.Group(
-        [...images, teamNameText, teamNumberText],
-        {
-          left: 0,
-          top: 70,
-          // Optional: group-specific options
-        }
-      );
+      // Add text to the canvas ensuring they are on top
+      canvas.add(teamNameText);
+      canvas.add(teamNumberText);
 
-      canvas.add(group);
+      // Bring text to the front
+      teamNameText.bringToFront();
+      teamNumberText.bringToFront();
+
       canvas.renderAll();
     };
 
     // Initialize the canvas with images and text
-    addTextAndGroup();
+    const initializeCanvas = async () => {
+      await addImages();
+      addText();
+    };
+
+    initializeCanvas();
     console.log(canvas._objects);
   }, []);
 
@@ -158,4 +160,4 @@ const UniformBuilder: React.FC = () => {
   );
 };
 
-export default UniformBuilder;
+export default UniformBuilderNoGrouping;
