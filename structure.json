@@ -1,0 +1,104 @@
+{
+  "id": 351,
+  "uniform_type": "",
+  "themeColorSettings": {
+    "0": [
+      {
+        "code": ""
+      }
+    ],
+    "1": [
+      {
+        "code": ""
+      }
+    ],
+    "2": [
+      {
+        "code": ""
+      }
+    ]
+  },
+  "uniform": {
+    "front": [
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      }
+    ],
+    "left": [
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      },
+      {
+        "name": "",
+        "link": ""
+      }
+    ]
+  },
+  "teamName": {
+    "font_name": "",
+    "font_path": "",
+    "text_value": ""
+  },
+  "frontNumber": {
+    "font_name": "",
+    "font_path": "",
+    "text_value": ""
+  },
+  "brand_logo": {
+    "link": ""
+  }
+}
