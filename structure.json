@@ -1,104 +1,63 @@
 {
   "id": 351,
-  "uniform_type": "",
-  "themeColorSettings": {
-    "0": [
-      {
-        "code": ""
-      }
-    ],
-    "1": [
-      {
-        "code": ""
-      }
-    ],
-    "2": [
-      {
-        "code": ""
-      }
-    ]
-  },
+  "uniform_type": "jersey",
+  "themeColorSettings": [
+    {
+      "code": "FLB",
+      "default_color": "Flag Blue",
+      "parts": ["back_panel", "front_body", "piping"]
+    },
+    {
+      "code": "FLG",
+      "default_color": "Flag Yellow",
+      "parts": ["collar", "arm_cuff", "side_graphic"]
+    }
+  ],
   "uniform": {
     "front": [
       {
-        "name": "",
-        "link": ""
+        "name": "side_graphic",
+        "link": "https://s3.us-west-2.amazonaws.com/uniformbuilder/materials/production/php9rcZPc.png"
       },
       {
-        "name": "",
-        "link": ""
+        "name": "arm_cuff",
+        "link": "https://s3.us-west-2.amazonaws.com/uniformbuilder/materials/production/phproJMUT.png"
       },
       {
-        "name": "",
-        "link": ""
+        "name": "piping",
+        "link": "https://s3.us-west-2.amazonaws.com/uniformbuilder/materials/production/phpJY0Sp5.png"
       },
       {
-        "name": "",
-        "link": ""
+        "name": "front_body",
+        "link": "https://s3.us-west-2.amazonaws.com/uniformbuilder/materials/production/phpHYIxM6.png"
       },
       {
-        "name": "",
-        "link": ""
+        "name": "back_panel",
+        "link": "https://s3.us-west-2.amazonaws.com/uniformbuilder/materials/production/php8qJb4l.png"
       },
       {
-        "name": "",
-        "link": ""
+        "name": "collar",
+        "link": "https://s3.us-west-2.amazonaws.com/uniformbuilder/materials/production/php6vpjhs.png"
       },
       {
-        "name": "",
-        "link": ""
+        "name": "shadows",
+        "link": "https://s3.us-west-2.amazonaws.com/uniformbuilder/materials/production/phpHpq74z.png"
       },
       {
-        "name": "",
-        "link": ""
-      }
-    ],
-    "left": [
-      {
-        "name": "",
-        "link": ""
-      },
-      {
-        "name": "",
-        "link": ""
-      },
-      {
-        "name": "",
-        "link": ""
-      },
-      {
-        "name": "",
-        "link": ""
-      },
-      {
-        "name": "",
-        "link": ""
-      },
-      {
-        "name": "",
-        "link": ""
-      },
-      {
-        "name": "",
-        "link": ""
-      },
-      {
-        "name": "",
-        "link": ""
+        "name": "highlights",
+        "link": "https://s3.us-west-2.amazonaws.com/uniformbuilder/materials/production/phpQgxbTp.png"
       }
     ]
   },
   "teamName": {
-    "font_name": "",
-    "font_path": "",
-    "text_value": ""
+    "font_name": "Bears NEW",
+    "text_value": "RED STICK"
   },
   "frontNumber": {
-    "font_name": "",
-    "font_path": "",
-    "text_value": ""
+    "font_name": "Bears NEW",
+    "text_value": "23"
   },
   "brand_logo": {
-    "link": ""
+    "link": "https://s3.us-west-2.amazonaws.com/qx7/uploaded_files/master_trims/20230803140846/pupJTi4WMr.png"
   }
 }
